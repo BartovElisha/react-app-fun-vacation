@@ -11,7 +11,7 @@ function Navbar() {
                 <ul className="navbar-nav flex-row">
                     <li className="nav-item me-3">
                         <NavLink to="/orders" className="nav-link">
-                            Orders
+                            Order Now
                         </NavLink>
                     </li>
                     <li className="nav-item me-3">

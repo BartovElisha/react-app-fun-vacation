@@ -1,10 +1,15 @@
-function Title() {
+interface Props {
+    main: string;
+    sub: string;
+}
+
+function Title({main,sub}: Props) {
     return ( 
         <h2 className="text-center my-3">
-            Title
+            {main}
             <br />
             <small className="text-muted">
-                Sub Title
+                {sub}
             </small>
         </h2>
     );
