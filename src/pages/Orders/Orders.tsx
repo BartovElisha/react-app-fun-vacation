@@ -1,5 +1,6 @@
 import Joi from "joi";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import Title from "../../components/Title";
 import { Offer, data } from "../../data/offers";
 
@@ -37,7 +38,7 @@ function Orders() {
         // Clear error state if all inputs are valid
         setError('');
 
-        console.log("Successfully validated !!!");
+        toast.success("Success ! Continue to checkout...");
     }
 
     return (
@@ -109,7 +110,7 @@ function Orders() {
                                     type="checkbox"
                                     className="form-check-input"
                                     checked={agree}
-                                    onClick={() => setAgree(!agree)}
+                                    onChange={() => setAgree(!agree)}
                                 />
                                 <label className="form-check-label">
                                     I agree to terms...

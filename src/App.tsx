@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import './App.css';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
@@ -10,6 +11,8 @@ function App() {
   return (
         <>
             <Navbar />
+            <ToastContainer />
+            
             <Routes>
                 <Route 
                     path="/"
