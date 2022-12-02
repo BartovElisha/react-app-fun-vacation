@@ -13,6 +13,13 @@ function Orders() {
     const [agree,setAgree] = useState<boolean>(false);
     const [error,setError] = useState<string>('');
 
+    function crearFields() {
+        setVacation('');
+        setName('');
+        setEmail('');
+        setAgree(false);
+    }
+
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();  // Cancel the default action of the form to reload
 
@@ -39,6 +46,7 @@ function Orders() {
         setError('');
 
         toast.success("Success ! Continue to checkout...");
+        crearFields();
     }
 
     return (
