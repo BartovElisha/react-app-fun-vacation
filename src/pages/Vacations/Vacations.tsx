@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../../components/Title";
 import { priceFormat } from "../../utils/utils";
 
@@ -11,6 +11,17 @@ interface IVacation {
 
 function Vacations() {
     const [vacations,setVacations] = useState<Array<IVacation>>([]);
+
+    function getVacations() {
+        fetch('http://localhost:3000/vacations/')
+        .then(responce => responce.json())
+        .then(json => {
+            setVacations(json);
+        });
+    }
+
+    // Hook useEffect, Run getVacation only ones time then page loaded
+    useEffect(getVacations,[]);
 
     return (
         <>

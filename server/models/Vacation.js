@@ -17,4 +17,14 @@ const vacationSchema = new mongoose.Schema({
 
 const Vacation = mongoose.model('Vacation', vacationSchema);
 
+/* Created Object 
+    Vacation {
+        data: value,
+        location: value,
+        price: value,
+        _id: value, --> Added by mongo DB automaticly
+        __v: value  -> Added by mongo DB automaticly Version
+    }
+*/
+
 exports.Vacation = Vacation;
