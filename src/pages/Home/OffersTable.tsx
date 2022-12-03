@@ -21,6 +21,22 @@ function OffersTable() {
         // 1. Convert from string to SortDirection enum type
         const direction = value as SortDirection;
         setSort(direction);
+
+        // 2. Sort by Location A-Z or Z-A 
+        let result = [...data];
+        if(direction === SortDirection.desc) {
+            result.sort((a,b) => 
+                a.location > b.location ? -1 : a.location < b.location ? 1 : 0
+            );
+        }
+        else {  // Default sort = A-Z
+            result.sort((a,b) => 
+                a.location < b.location ? -1 : a.location > b.location ? 1 : 0
+            );
+        }  
+        
+        // 3. Update State offers Array 
+        setOffers(result);
     }
 
     function handleSearch(value: string) {
@@ -40,7 +56,7 @@ function OffersTable() {
             );
         }
 
-        // 5. Update offers Array
+        // 5. Update State offers Array
         setOffers(result);
     }
 
@@ -59,8 +75,8 @@ function OffersTable() {
                     value={sort}
                     onChange={((e) => handleSort(e.target.value))}
                 >
-                    <option>Location A-Z</option>
-                    <option>Location Z-A</option>
+                    <option value={SortDirection.asc}>Location A-Z</option>
+                    <option value={SortDirection.desc}>Location Z-A</option>
                 </select>
             </div>
 
