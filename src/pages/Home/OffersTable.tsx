@@ -11,16 +11,17 @@ function OffersTable() {
     // States
     const [offers,setOffers] = useState<Array<Offer>>(data);
     const [search,setSearch] = useState<string>('');
-    const [sort,setSort] = useState<SortDirection>(SortDirection.asc);
+    const [sortLocation,setSortLocation] = useState<SortDirection>(SortDirection.asc);
+    const [sortPrice,setSortPrice] = useState<SortDirection>(SortDirection.asc);
 
     function priceFormat(value: number):string {
         return `${value}$`
     }
 
-    function handleSort(value: string) {
+    function handleLocationSort(value: string) {
         // 1. Convert from string to SortDirection enum type
         const direction = value as SortDirection;
-        setSort(direction);
+        setSortLocation(direction);
 
         // 2. Sort by Location A-Z or Z-A 
         let result = [...data];
@@ -38,6 +39,28 @@ function OffersTable() {
         // 3. Update State offers Array 
         setOffers(result);
     }
+
+    function handlePriceSort(value: string) {
+        // 1. Convert from string to SortDirection enum type
+        const direction = value as SortDirection;
+        setSortPrice(direction);
+
+        // 2. Sort by Price A-Z or Z-A 
+        let result = [...data];
+        if(direction === SortDirection.desc) {
+            result.sort((a,b) => 
+                a.price > b.price ? -1 : a.price < b.price ? 1 : 0
+            );
+        }
+        else {  // Default sort = A-Z
+            result.sort((a,b) => 
+                a.price < b.price ? -1 : a.price > b.price ? 1 : 0
+            );
+        }  
+        
+        // 3. Update State offers Array 
+        setOffers(result);
+    }    
 
     function handleSearch(value: string) {
         // 1. Update form input value
@@ -71,12 +94,20 @@ function OffersTable() {
                     className="form-control me-4"
                 />
                 <select
-                    className="form-select"
-                    value={sort}
-                    onChange={((e) => handleSort(e.target.value))}
+                    className="form-select me-4 text-muted"
+                    value={sortLocation}
+                    onChange={((e) => handleLocationSort(e.target.value))}
                 >
                     <option value={SortDirection.asc}>Location A-Z</option>
                     <option value={SortDirection.desc}>Location Z-A</option>
+                </select>
+                <select
+                    className="form-select me-4 text-muted"
+                    value={sortPrice}
+                    onChange={((e) => handlePriceSort(e.target.value))}
+                >
+                    <option value={SortDirection.asc}>Price Low to High</option>
+                    <option value={SortDirection.desc}>Price High to Low</option>
                 </select>
             </div>
 
