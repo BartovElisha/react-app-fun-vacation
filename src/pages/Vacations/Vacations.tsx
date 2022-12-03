@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Title from "../../components/Title";
 import { priceFormat } from "../../utils/utils";
+import AddForm from "./AddForm";
 
-interface IVacation {
+export interface IVacation {
     _id: number;
     date: string;
     location: string;
@@ -36,6 +37,9 @@ function Vacations() {
                     >No Vacations
                 </div>
             }
+
+            <AddForm />
+
             <table className="table table-hover">
                 <thead>
                     <tr>
