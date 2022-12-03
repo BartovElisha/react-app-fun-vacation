@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Offer, data } from "../../data/offers";
+import { priceFormat } from "../../utils/utils";
 
 enum SortDirection {
     asc = "asc",   // A-Z
@@ -13,10 +14,6 @@ function OffersTable() {
     const [search,setSearch] = useState<string>('');
     const [sortLocation,setSortLocation] = useState<SortDirection>(SortDirection.asc);
     const [sortPrice,setSortPrice] = useState<SortDirection>(SortDirection.asc);
-
-    function priceFormat(value: number):string {
-        return `${value}$`
-    }
 
     function handleLocationSort(value: string) {
         // 1. Convert from string to SortDirection enum type
