@@ -15,6 +15,11 @@ function Navbar() {
                         </NavLink>
                     </li>
                     <li className="nav-item me-3">
+                        <NavLink to="/vacations" className="nav-link">
+                            Vacations
+                        </NavLink>
+                    </li>
+                    <li className="nav-item me-3">
                         <NavLink to="/About" className="nav-link">
                             About
                         </NavLink>

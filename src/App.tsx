@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import About from './pages/About/About';
 import Home from './pages/Home/Home';
 import Orders from './pages/Orders/Orders';
+import Vacations from './pages/Vacations/Vacations';
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
                 <Route 
                     path="/orders"
                     element={<Orders />}
+                />  
+                <Route 
+                    path="/vacations"
+                    element={<Vacations />}
                 />              
                 <Route 
                     path="/about"
