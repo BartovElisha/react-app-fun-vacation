@@ -100,7 +100,7 @@ module.exports = {
 
             const { error, value } = scheme.validate({
                 ...req.body,
-                id: req.params._id
+                _id: req.params.id
             });
 
             if (error) {
@@ -120,6 +120,37 @@ module.exports = {
             res.status(400).send('error updating data');
         }
     },
+    // edit: async function (req, res, next) {
+    //     try {
+    //         const scheme = joi.object({
+    //             _id: joi.string().required(),
+    //             date: joi.string().required(),
+    //             location: joi.string().required(),
+    //             price: joi.number().min(1),
+    //         });
+
+    //         const { error, value } = scheme.validate({
+    //             ...req.body,
+    //             _id: req.params.id
+    //         });
+
+    //         if (error) {
+    //             console.log(error.details[0].message);
+    //             res.status(400).send('invalid data');
+    //             return;
+    //         }
+
+    //         const result = await Vacation.findOneAndUpdate(
+    //             value
+    //         );
+
+    //         res.json(result);
+    //     }
+    //     catch (err) {
+    //         console.log(err);
+    //         res.status(400).send('error updating data');
+    //     }
+    // },
 
     // sortCards: async function (req, res, next) {
     //     try {

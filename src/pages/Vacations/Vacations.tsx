@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Title from "../../components/Title";
 import { priceFormat } from "../../utils/utils";
 import AddForm from "./AddForm";
@@ -78,15 +79,18 @@ function Vacations() {
                                 <td>{vacation.date}</td>
                                 <td>{vacation.location}</td>
                                 <td>{priceFormat(vacation.price)}</td>
-                                <td>
+                                <td className="d-flex">
+                                    <Link 
+                                        to={`/edit/${vacation._id}`}
+                                        className="btn btn-default"
+                                    >
+                                        <i className="bi-pen"></i>
+                                    </Link>
                                     <button 
                                         className="btn btn-default"
                                         onClick={() => delVacation(vacation)}
                                     >
-                                        <i 
-                                            className="bi-trash"
-                                        >
-                                        </i>
+                                        <i className="bi-trash"></i>
                                     </button>
                                 </td>
                             </tr>        
