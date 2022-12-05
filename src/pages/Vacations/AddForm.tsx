@@ -2,7 +2,11 @@ import Joi from "joi";
 import { useState } from "react";
 import { IVacation } from "./Vacations";
 
-function AddForm() {
+interface Props {
+    addVacation: Function;
+}
+
+function AddForm({ addVacation }: Props) {
     const [date, setDate] = useState<string>('');
     const [location, setLocation] = useState<string>('');
     const [price, setPrice] = useState<number>(1);
@@ -14,7 +18,7 @@ function AddForm() {
         setPrice(1);
     }
 
-    function addVacation(value: IVacation) {
+    function fetchVacation(value: IVacation) {
         fetch('http://localhost:3000/vacations/', {
             method: 'POST',
             headers: {
@@ -24,7 +28,7 @@ function AddForm() {
         })
             .then(response => response.json())
             .then(json => {
-                // setVacations(json);
+                addVacation(json);
                 console.log(json);
             })
     }
@@ -49,7 +53,7 @@ function AddForm() {
 
         setError('');
         clearFields();
-        addVacation(value);
+        fetchVacation(value);
     }
 
     return (
@@ -58,7 +62,7 @@ function AddForm() {
                 <input
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="form-control"
+                    className="form-control me-3"
                     type="text"
                     placeholder="Date"
                 />
@@ -66,7 +70,7 @@ function AddForm() {
                 <input
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="form-control"
+                    className="form-control me-3"
                     type="text"
                     placeholder="Location"
                 />
@@ -74,7 +78,7 @@ function AddForm() {
                 <input
                     value={price}
                     onChange={(e) => setPrice(+e.target.value)}
-                    className="form-control"
+                    className="form-control me-3"
                     type="number"
                     placeholder="Price"
                 />
