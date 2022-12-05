@@ -13,6 +13,29 @@ module.exports = {
         }
     },
 
+    getItem: async function (req, res, next) {
+        try {
+            const scheme = joi.object({
+                _id: joi.string().required(),
+            });
+
+            const { error, value } = scheme.validate({ _id: req.params.id });
+
+            if (error) {
+                console.log(error.details[0].message);
+                res.status(400).send('invalid data');
+                return;
+            }
+
+            const result = await Vacation.findOne({ _id: value._id });
+            res.json(result);
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).send('error getting vacations');
+        }
+    },
+
     add: async function (req, res, next) {
         try {
             const scheme = joi.object({
@@ -49,7 +72,7 @@ module.exports = {
                 _id: joi.string().required(),
             });
 
-            const { error, value } = scheme.validate({ _id: req.body._id });
+            const { error, value } = scheme.validate({ _id: req.params.id });
 
             if (error) {
                 console.log(error.details[0].message);
@@ -58,7 +81,7 @@ module.exports = {
             }
 
             await Vacation.deleteOne(value).exec();
-            res.json(req.body);
+            res.json(value);
         }
         catch (err) {
             console.log(err);
@@ -86,7 +109,7 @@ module.exports = {
                 return;
             }
 
-            const result = await Card.findOneAndUpdate(
+            const result = await Vacation.findOneAndUpdate(
                 value
             );
 

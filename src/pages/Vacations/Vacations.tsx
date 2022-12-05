@@ -30,6 +30,20 @@ function Vacations() {
         setVacations(updated);
     }
 
+    function delVacation(vacation: IVacation) {
+        fetch(`http://localhost:3000/vacations/${vacation._id}`, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(json => {
+                const updated = [...vacations].filter(
+                    vacationItem => vacationItem._id !== vacation._id
+                );
+
+                setVacations(updated);
+            })
+    }
+
     return (
         <>
             <Title 
@@ -54,6 +68,7 @@ function Vacations() {
                         <th className="w-25">Date</th>
                         <th className="w-25">Location</th>
                         <th className="w-50">Price</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,6 +78,17 @@ function Vacations() {
                                 <td>{vacation.date}</td>
                                 <td>{vacation.location}</td>
                                 <td>{priceFormat(vacation.price)}</td>
+                                <td>
+                                    <button 
+                                        className="btn btn-default"
+                                        onClick={() => delVacation(vacation)}
+                                    >
+                                        <i 
+                                            className="bi-trash"
+                                        >
+                                        </i>
+                                    </button>
+                                </td>
                             </tr>        
                         )
                     }
