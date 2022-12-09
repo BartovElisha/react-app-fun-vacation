@@ -1,6 +1,7 @@
 import Joi from "joi";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { IVacation } from "../Vacations/Vacations";
 
 function Edit() {
     
@@ -30,13 +31,13 @@ function Edit() {
     
     function handleClick() {
         const schema = Joi.object().keys({
-            // date: Joi.string().required().min(3),
+            date: Joi.string().required().min(3),
             location: Joi.string().required().min(3),
             price: Joi.number().required().min(1)
         });
 
-        const { error } = schema.validate({
-            // date,
+        const { error, value } = schema.validate({
+            date,
             location,
             price
         });
@@ -47,8 +48,27 @@ function Edit() {
         }
 
         setError('');
-        navigate('/vacations');
+        editVacation(value);
     }   
+
+    function editVacation(vacation: IVacation) {
+        fetch(`http://localhost:3000/vacations/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(vacation)
+        })
+            .then(res => res.json())
+            .then(json => {
+                if (json.error) {
+                    setError(json.error);
+                    return;
+                }
+
+                navigate('/vacations');
+            })
+    }
 
     return (  
         <>

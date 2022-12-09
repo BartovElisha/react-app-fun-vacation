@@ -5,7 +5,7 @@ const vacations = require('../controllers/vacations');
 router.get('/', vacations.getAll);
 router.get('/:id', vacations.getItem);
 router.post('/', vacations.add);
-router.put('/:id', vacations.edit);
+router.patch('/:id', vacations.edit);
 router.delete('/:id', vacations.delete);
 
 module.exports = router;
