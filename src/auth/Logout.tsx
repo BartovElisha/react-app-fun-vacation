@@ -4,8 +4,8 @@ function Logout() {
     return (
         <>
             <Title 
-                main={"Lotout"} 
-                sub={"simple Logout"}                 
+                main={"Logout"} 
+                sub={"logout from application"}                 
             />
         </>
     );

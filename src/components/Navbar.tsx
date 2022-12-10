@@ -20,17 +20,17 @@ function Navbar() {
                         </NavLink>
                     </li>
                     <li className="nav-item me-3">
-                        <NavLink to="/About" className="nav-link">
+                        <NavLink to="/about" className="nav-link">
                             About
                         </NavLink>
                     </li>
                     <li className="nav-item me-3">
-                        <NavLink to="/SignUp" className="nav-link">
+                        <NavLink to="/signUp" className="nav-link">
                             Sign Up
                         </NavLink>
                     </li>
                     <li className="nav-item me-3">
-                        <NavLink to="/Login" className="nav-link">
+                        <NavLink to="/login" className="nav-link">
                             Login
                         </NavLink>
                     </li>
