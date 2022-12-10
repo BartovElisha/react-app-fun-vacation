@@ -24,6 +24,21 @@ function Navbar() {
                             About
                         </NavLink>
                     </li>
+                    <li className="nav-item me-3">
+                        <NavLink to="/SignUp" className="nav-link">
+                            Sign Up
+                        </NavLink>
+                    </li>
+                    <li className="nav-item me-3">
+                        <NavLink to="/Login" className="nav-link">
+                            Login
+                        </NavLink>
+                    </li>
+                    <li className="nav-item me-3">
+                        <NavLink to="/Logout" className="nav-link">
+                            Logout
+                        </NavLink>
+                    </li>
                 </ul>
             </div>  
         </nav>
