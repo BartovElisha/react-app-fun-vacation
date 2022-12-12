@@ -2,6 +2,7 @@ import Joi from "joi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Title from "../components/Title";
+import { setToken } from "./tokenMenagment";
 
 interface ILoginData {
     email: string;
@@ -43,7 +44,7 @@ function Login() {
         })
             .then(response => response.json())
             .then(json => {
-                localStorage.setItem('token', json.token);
+                setToken(json.token)
                 navigate('/vacations');
             })
     }    
