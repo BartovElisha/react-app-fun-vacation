@@ -1,7 +1,8 @@
 import Joi from "joi";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getRequest } from "../../services/apiService";
+import { getRequest, patchRequest } from "../../services/apiService";
+import { formatDate } from "../../utils/utils";
 import { IVacation } from "../Vacations/Vacations";
 
 function Edit() {
@@ -16,20 +17,21 @@ function Edit() {
 
     // Hoock runs only one time after loadin page
     useEffect(() => {
-        const res = getRequest(`vacations/${id}`);  // With token verification
-        if(!res) return;
+        const res = getRequest(`vacations/${id}`);
+        if (!res) return;
 
         res.then(res => res.json())
-        .then(json => {
-            if (json.ok === false) {
-                setError('error get the data');
-                return;
-            }
-            setDate(json.date);
-            setLocation(json.location);
-            setPrice(json.price);
-        })
-    }, []);  
+            .then(json => {
+                if (json.ok === false) {
+                    setError('error get the data');
+                    return;
+                }
+
+                setDate(json.date);
+                setLocation(json.location);
+                setPrice(json.price);
+            })
+    }, [id]);  
     
     function handleClick() {
         const schema = Joi.object().keys({
@@ -54,22 +56,21 @@ function Edit() {
     }   
 
     function editVacation(vacation: IVacation) {
-        fetch(`http://localhost:3000/vacations/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(vacation)
-        })
-        .then(res => res.json())
-        .then(json => {
-            if (json.error) {
-                setError(json.error);
-                return;
-            }
+        const res = patchRequest(
+            `vacations/${id}`,
+            vacation
+        );
+        if (!res) return;
 
-            navigate('/vacations');
-        })
+        res.then(res => res.json())
+            .then(json => {
+                if (json.error) {
+                    setError(json.error);
+                    return;
+                }
+
+                navigate('/vacations');
+            })
     }
 
     return (  
@@ -81,13 +82,11 @@ function Edit() {
                         className="form-label">
                         Date
                     </label>
-                    <input
-                        type="text"
-                        readOnly={true}
-                        className="form-control-plaintext"
-                        id="date"
-                        value={`${date}`}
-                    />
+                    <div>
+                        {
+                            formatDate(date)
+                        }
+                    </div>
                 </div>
 
                 <div className="mb-3">

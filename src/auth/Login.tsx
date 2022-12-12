@@ -2,6 +2,7 @@ import Joi from "joi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Title from "../components/Title";
+import { postRequest } from "../services/apiService";
 import { setToken } from "./tokenMenagment";
 
 interface ILoginData {
@@ -35,16 +36,15 @@ function Login() {
     }
 
     function login(data: ILoginData) {
-        fetch('http://localhost:3000/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => response.json())
+        const res = postRequest(
+            'users/login',
+            data
+        );
+        if (!res) return;
+
+        res.then(response => response.json())
             .then(json => {
-                setToken(json.token)
+                setToken(json.token);
                 navigate('/vacations');
             })
     }    

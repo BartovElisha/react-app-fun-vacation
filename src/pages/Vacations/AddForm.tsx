@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { useState } from "react";
+import { postRequest } from "../../services/apiService";
 import { IVacation } from "./Vacations";
 
 interface Props {
@@ -19,17 +20,15 @@ function AddForm({ addVacation }: Props) {
     }
 
     function fetchVacation(value: IVacation) {
-        fetch('http://localhost:3000/vacations/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(value)
-        })
-            .then(response => response.json())
+        const res = postRequest(
+            'vacations/',
+            value
+        );
+        if (!res) return;
+
+        res.then(response => response.json())
             .then(json => {
                 addVacation(json);
-                console.log(json);
             })
     }
 

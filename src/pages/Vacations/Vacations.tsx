@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Title from "../../components/Title";
-import { getRequest } from "../../services/apiService";
-import { priceFormat } from "../../utils/utils";
+import { deleteRequest, getRequest } from "../../services/apiService";
+import { formatDate, priceFormat } from "../../utils/utils";
 import AddForm from "./AddForm";
 
 export interface IVacation {
@@ -16,13 +16,13 @@ function Vacations() {
     const [vacations,setVacations] = useState<Array<IVacation>>([]);
 
     function getVacations() {
-        const res = getRequest('vacations');  // With token verification
-        if(!res) return;
-        
-        res.then(responce => responce.json())
-        .then(json => {
-            setVacations(json);
-        });
+        const res = getRequest('vacations');
+        if (!res) return;
+
+        res.then(response => response.json())
+            .then(json => {
+                setVacations(json);
+            })
     }
 
     // Hook useEffect, Run getVacation only ones time then page loaded
@@ -35,10 +35,12 @@ function Vacations() {
     }
 
     function delVacation(vacation: IVacation) {
-        fetch(`http://localhost:3000/vacations/${vacation._id}`, {
-            method: 'DELETE'
-        })
-            .then(response => response.json())
+        const res = deleteRequest(
+            `vacations/${vacation._id}`
+        );
+        if (!res) return;
+
+        res.then(response => response.json())
             .then(json => {
                 const updated = [...vacations].filter(
                     vacationItem => vacationItem._id !== vacation._id
@@ -79,7 +81,7 @@ function Vacations() {
                     {
                         vacations.map(vacation => 
                             <tr key={vacation._id}>
-                                <td>{vacation.date}</td>
+                                <td>{formatDate(vacation.date)}</td>
                                 <td>{vacation.location}</td>
                                 <td>{priceFormat(vacation.price)}</td>
                                 <td className="d-flex">

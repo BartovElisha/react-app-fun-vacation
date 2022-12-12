@@ -2,6 +2,7 @@ import Joi from "joi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Title from "../components/Title";
+import { postRequest } from "../services/apiService";
 
 interface ISignupData {
     name: string;
@@ -38,18 +39,17 @@ function SignUp() {
     }
 
     function regiser(data: ISignupData) {
-        fetch('http://localhost:3000/users/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => response.json())
+        const res = postRequest(
+            'users/signup',
+            data
+        );
+        if (!res) return;
+
+        res.then(response => response.json())
             .then(json => {
                 navigate('/login');
             })
-    }    
+    }
 
     return (
         <>
