@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
 import Login from './auth/Login';
-import Logout from './auth/Logout';
 import SignUp from './auth/SignUp';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
@@ -42,10 +41,6 @@ function App() {
                 <Route 
                     path="/login"
                     element={<Login />}
-                />              
-                <Route 
-                    path="/logout"
-                    element={<Logout />}
                 />              
                 <Route 
                     path="/edit/:id"  // Dinamic Path

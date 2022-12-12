@@ -6,9 +6,10 @@ const handleRequest = (
     url: string,
     method: string,
     headers?: HeadersInit,
-    data?: object): Promise<Response> | null => {
+    data?: object,
+    checkToken = true): Promise<Response> | null => {
 
-    if (!verifyToken()) {
+    if (checkToken && !verifyToken()) {
         return null;
     }
 
@@ -31,12 +32,16 @@ export const getRequest = (endPoint: string): Promise<Response> | null => {
     );
 }
 
-export const postRequest = (endPoint: string, data: object): Promise<Response> | null => {
+export const postRequest = (
+    endPoint: string,
+    data: object,
+    checkToken?: boolean): Promise<Response> | null => {
     return handleRequest(
         `${serverUrl}${endPoint}`,
         'POST',
         { 'Content-Type': 'application/json' },
-        data
+        data,
+        checkToken
     );
 }
 

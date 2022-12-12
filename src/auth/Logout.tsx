@@ -1,13 +1,22 @@
-import Title from "../components/Title";
+import { useNavigate } from "react-router-dom";
+import { removeToken } from "./tokenMenagment";
 
 function Logout() {
+    const navigate = useNavigate();
+
+    function handleLogout() {
+        removeToken();
+        navigate('/login');
+    }
+
     return (
-        <>
-            <Title 
-                main={"Logout"} 
-                sub={"logout from application"}                 
-            />
-        </>
+        <a
+            href="x"
+            onClick={handleLogout}
+            className="nav-link btn"
+        >
+            Log Out
+        </a>
     );
 }
 
