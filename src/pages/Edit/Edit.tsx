@@ -61,15 +61,15 @@ function Edit() {
             },
             body: JSON.stringify(vacation)
         })
-            .then(res => res.json())
-            .then(json => {
-                if (json.error) {
-                    setError(json.error);
-                    return;
-                }
+        .then(res => res.json())
+        .then(json => {
+            if (json.error) {
+                setError(json.error);
+                return;
+            }
 
-                navigate('/vacations');
-            })
+            navigate('/vacations');
+        })
     }
 
     return (  
