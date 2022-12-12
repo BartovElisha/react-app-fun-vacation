@@ -53,7 +53,7 @@ function SignUp() {
 
     return (
         <>
-            <div className="p-3 form-max-w m-auto">
+            <div className="p-3 form-max-w w-25 m-auto">
                 <Title 
                     main="Sign Up"
                     sub="register to the application"
