@@ -1,6 +1,7 @@
 import Joi from "joi";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { getRequest } from "../../services/apiService";
 import { IVacation } from "../Vacations/Vacations";
 
 function Edit() {
@@ -15,18 +16,19 @@ function Edit() {
 
     // Hoock runs only one time after loadin page
     useEffect(() => {
-        fetch(`http://localhost:3000/vacations/${id}`)
-            .then(res => res.json())
-            .then(json => {
-                if (json.ok === false) {
-                    setError('error get the data');
-                    return;
-                }
+        const res = getRequest(`vacations/${id}`);  // With token verification
+        if(!res) return;
 
-                setDate(json.date);
-                setLocation(json.location);
-                setPrice(json.price);
-            })
+        res.then(res => res.json())
+        .then(json => {
+            if (json.ok === false) {
+                setError('error get the data');
+                return;
+            }
+            setDate(json.date);
+            setLocation(json.location);
+            setPrice(json.price);
+        })
     }, []);  
     
     function handleClick() {

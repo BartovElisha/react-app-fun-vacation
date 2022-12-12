@@ -16,7 +16,7 @@ function Vacations() {
     const [vacations,setVacations] = useState<Array<IVacation>>([]);
 
     function getVacations() {
-        const res = getRequest('vacations');
+        const res = getRequest('vacations');  // With token verification
         if(!res) return;
         
         res.then(responce => responce.json())
