@@ -5,7 +5,8 @@ function Logout() {
     const navigate = useNavigate();
 
     function handleLogout() {
-        removeToken();
+        // removeToken();
+        localStorage.clear();  // Logout + clear Admin.
         navigate('/login');
     }
 

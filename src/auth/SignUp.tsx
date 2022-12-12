@@ -41,7 +41,8 @@ function SignUp() {
     function regiser(data: ISignupData) {
         const res = postRequest(
             'users/signup',
-            data
+            data,
+            false
         );
         if (!res) return;
 

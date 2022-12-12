@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
+import AdminOnly from './auth/AdminOnly';
 import Login from './auth/Login';
 import RouteGuard from './auth/RouteGuard';
 import SignUp from './auth/SignUp';
@@ -54,7 +55,11 @@ function App() {
                             <Edit />
                         </RouteGuard>                        
                     }
-                />              
+                />  
+                <Route
+                    path='/admin'
+                    element={<AdminOnly />}
+                />               
             </Routes>
             
             <Footer />      

@@ -38,6 +38,15 @@ function Navbar() {
                     <li className="nav-item me-3">
                         <Logout />
                     </li>
+                    <li className="nav-item">
+                        <NavLink
+                            className="nav-link"
+                            aria-current="page"
+                            to="/admin"
+                        >
+                            Admin Only
+                        </NavLink>
+                    </li>                    
                 </ul>
             </div>  
         </nav>
