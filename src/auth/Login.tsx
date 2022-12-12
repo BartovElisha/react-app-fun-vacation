@@ -1,6 +1,7 @@
 import Joi from "joi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Title from "../components/Title";
 import { postRequest } from "../services/apiService";
 import { setToken } from "./tokenMenagment";
@@ -45,6 +46,30 @@ function Login() {
 
         res.then(response => response.json())
             .then(json => {
+                if(json.error) {
+                    toast.error(json.error, {
+                            position: "top-center",
+                            autoClose: 3000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                            }    
+                        );
+                    return;
+                }  
+                toast.success(`User ${json.name} succsessifully Loged In`,{
+                    position: "top-left",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                })                              
                 setToken(json.token);
                 localStorage.setItem('admin', json.isAdmin)
                 navigate('/vacations');
@@ -53,7 +78,7 @@ function Login() {
 
     return (
         <>
-            <div className="p-3 form-max-w w-25 m-auto">
+            <div className="p-3 form-max-w w-50 m-auto">
                 <Title 
                     main="Login"
                     sub=""

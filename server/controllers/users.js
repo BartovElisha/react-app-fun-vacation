@@ -16,16 +16,24 @@ module.exports = {
 
         if (error) {
             console.log(error.details[0].message);
-            res.status(401).send('Unauthorized');
+            res.status(401).json({ error: 'Unauthorized' });
+            // res.status(401).send('Unauthorized');            
             return;
         }
 
         try {
             const user = await User.findOne({ email: value.email });
-            if (!user) throw Error;
+            if(!user) {
+                res.status(400).json({ error: 'Email Not Found or Incorrect Password' });
+                return;
+            }
+            
             const validPassword = await bcrypt.compare(value.password, user.password);
-            if (!validPassword) throw 'Invalid password';
-
+            if(!validPassword) {
+                res.status(400).json({ error: 'Email Not Found or Incorrect Password' });
+                return;
+            }
+            
             const param = { email: value.email };
             const token = jwt.sign(param, config.jwt_token, { expiresIn: '72800s' });
 
@@ -54,14 +62,14 @@ module.exports = {
 
         if (error) {
             console.log(error.details[0].message);
-            res.status(400).send('error sign up new user');
+            res.status(400).json({ error: 'error sign up new user' });
             return;
         }
 
         try {
             const user = await User.findOne({ email: value.email });
             if (user) {
-                return res.status(400).send("User already registered.");
+                return res.status(400).json({ error: "User already registered." });
             }
 
             const hash = await bcrypt.hash(value.password, 10);
@@ -82,7 +90,7 @@ module.exports = {
         }
         catch (err) {
             console.log(err.message);
-            res.status(400).send('error sign up new user');
+            res.status(400).json({ error: 'error sign up new user' });
         }
     },
 }

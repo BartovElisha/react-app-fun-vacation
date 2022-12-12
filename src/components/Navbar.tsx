@@ -38,7 +38,7 @@ function Navbar() {
                     <li className="nav-item me-3">
                         <Logout />
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item me-3">
                         <NavLink
                             className="nav-link"
                             aria-current="page"

@@ -1,6 +1,7 @@
 import Joi from "joi";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { getRequest, patchRequest } from "../../services/apiService";
 import { formatDate } from "../../utils/utils";
 import { IVacation } from "../Vacations/Vacations";
@@ -64,11 +65,31 @@ function Edit() {
 
         res.then(res => res.json())
             .then(json => {
-                if (json.error) {
+                if(json.error) {
+                    toast.error(json.error, {
+                        position: "top-center",
+                        autoClose: 3000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        }    
+                    );
                     setError(json.error);
                     return;
                 }
-
+                toast.success(`User ${json.name} was Updated`,{
+                    position: "top-left",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                })
                 navigate('/vacations');
             })
     }
