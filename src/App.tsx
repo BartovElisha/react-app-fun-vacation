@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
 import Login from './auth/Login';
+import RouteGuard from './auth/RouteGuard';
 import SignUp from './auth/SignUp';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
@@ -28,7 +29,11 @@ function App() {
                 />  
                 <Route 
                     path="/vacations"
-                    element={<Vacations />}
+                    element={
+                        <RouteGuard>
+                            <Vacations />
+                        </RouteGuard>                        
+                    }
                 />              
                 <Route 
                     path="/about"
@@ -44,7 +49,11 @@ function App() {
                 />              
                 <Route 
                     path="/edit/:id"  // Dinamic Path
-                    element={<Edit />}
+                    element={
+                        <RouteGuard>
+                            <Edit />
+                        </RouteGuard>                        
+                    }
                 />              
             </Routes>
             

@@ -11,7 +11,6 @@ function Logout() {
 
     return (
         <a
-            href="x"
             onClick={handleLogout}
             className="nav-link btn"
         >
