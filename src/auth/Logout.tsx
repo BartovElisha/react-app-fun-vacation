@@ -15,7 +15,7 @@ function Logout() {
             onClick={handleLogout}
             className="nav-link btn text-dark"
         >
-            Log Out
+            LogOut
         </a>
     );
 }

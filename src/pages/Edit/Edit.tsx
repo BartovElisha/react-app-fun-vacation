@@ -80,7 +80,7 @@ function Edit() {
                     setError(json.error);
                     return;
                 }
-                toast.success(`User ${json.name} was Updated`,{
+                toast.success(`Vacation ${json.location} was Updated`,{
                     position: "top-left",
                     autoClose: 3000,
                     hideProgressBar: true,

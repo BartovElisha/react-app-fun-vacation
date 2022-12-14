@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Title from "../../components/Title";
 import { deleteRequest, getRequest } from "../../services/apiService";
 import { formatDate, priceFormat } from "../../utils/utils";
@@ -45,7 +46,17 @@ function Vacations() {
                 const updated = [...vacations].filter(
                     vacationItem => vacationItem._id !== vacation._id
                 );
-
+                
+                toast.info(`Vacation ${json.location} was deleted`,{
+                    position: "top-left",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                }); 
                 setVacations(updated);
             })
     }
