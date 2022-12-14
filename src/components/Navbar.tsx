@@ -1,3 +1,4 @@
+import { NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Logout from "../auth/Logout";
 
@@ -25,20 +26,54 @@ function Navbar() {
                             About
                         </NavLink>
                     </li>
-                    <li className="nav-item me-3">
+
+                    <NavDropdown title="Menu" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">
+                            <li className="nav-item">
+                                <NavLink to="/signUp" className="nav-link">
+                                    Sign Up
+                                </NavLink>
+                            </li>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">
+                            <li className="nav-item">
+                                <NavLink to="/login" className="nav-link">
+                                    Login
+                                </NavLink>
+                            </li>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">
+                            <li className="nav-item me-3">
+                                <Logout />
+                            </li>                        </NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#action/3.4">
+                            <li className="nav-item me-3">
+                                <NavLink
+                                    className="nav-link"
+                                    aria-current="page"
+                                    to="/admin"
+                                >
+                                    Admin Only
+                                </NavLink>
+                            </li> 
+                        </NavDropdown.Item>
+                    </NavDropdown>
+
+                    {/* <li className="nav-item me-3">
                         <NavLink to="/signUp" className="nav-link">
                             Sign Up
                         </NavLink>
-                    </li>
-                    <li className="nav-item me-3">
+                    </li> */}
+                    {/* <li className="nav-item me-3">
                         <NavLink to="/login" className="nav-link">
                             Login
                         </NavLink>
-                    </li>
-                    <li className="nav-item me-3">
+                    </li> */}
+                    {/* <li className="nav-item me-3">
                         <Logout />
-                    </li>
-                    <li className="nav-item me-3">
+                    </li> */}
+                    {/* <li className="nav-item me-3">
                         <NavLink
                             className="nav-link"
                             aria-current="page"
@@ -46,7 +81,7 @@ function Navbar() {
                         >
                             Admin Only
                         </NavLink>
-                    </li>                    
+                    </li>   */}
                 </ul>
             </div>  
         </nav>
