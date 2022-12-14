@@ -27,7 +27,7 @@ function Navbar() {
                         </NavLink>
                     </li>
 
-                    <NavDropdown title="Menu" id="basic-nav-dropdown">
+                    <NavDropdown title={<i className="bi bi-people"></i>} id="basic-nav-dropdown">
                         <NavDropdown.Item href="#">
                             <li className="nav-item">
                                 <NavLink to="/signUp" className="nav-link text-dark">

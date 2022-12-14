@@ -13,7 +13,7 @@ function Logout() {
     return (
         <a
             onClick={handleLogout}
-            className="nav-link btn text-dark"
+            className="nav-link btn text-dark text-left"
         >
             LogOut
         </a>
