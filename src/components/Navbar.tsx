@@ -28,29 +28,30 @@ function Navbar() {
                     </li>
 
                     <NavDropdown title="Menu" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">
+                        <NavDropdown.Item href="#">
                             <li className="nav-item">
-                                <NavLink to="/signUp" className="nav-link">
+                                <NavLink to="/signUp" className="nav-link text-dark">
                                     Sign Up
                                 </NavLink>
                             </li>
                         </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">
+                        <NavDropdown.Item href="#">
                             <li className="nav-item">
-                                <NavLink to="/login" className="nav-link">
+                                <NavLink to="/login" className="nav-link text-dark">
                                     Login
                                 </NavLink>
                             </li>
                         </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">
-                            <li className="nav-item me-3">
+                        <NavDropdown.Item href="#">
+                            <li className="nav-item">
                                 <Logout />
-                            </li>                        </NavDropdown.Item>
+                            </li>                        
+                        </NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">
+                        <NavDropdown.Item href="#">
                             <li className="nav-item me-3">
                                 <NavLink
-                                    className="nav-link"
+                                    className="nav-link text-dark"
                                     aria-current="page"
                                     to="/admin"
                                 >
@@ -59,7 +60,6 @@ function Navbar() {
                             </li> 
                         </NavDropdown.Item>
                     </NavDropdown>
-
                     {/* <li className="nav-item me-3">
                         <NavLink to="/signUp" className="nav-link">
                             Sign Up
