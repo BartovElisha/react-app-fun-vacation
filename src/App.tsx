@@ -1,10 +1,12 @@
-import { Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { useEffect, useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import './App.css';
 import AdminOnly from './auth/AdminOnly';
 import Login from './auth/Login';
 import RouteGuard from './auth/RouteGuard';
 import SignUp from './auth/SignUp';
+import { setToken } from './auth/tokenMenagment';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import About from './pages/About/About';
@@ -12,11 +14,76 @@ import Edit from './pages/Edit/Edit';
 import Home from './pages/Home/Home';
 import Orders from './pages/Orders/Orders';
 import Vacations from './pages/Vacations/Vacations';
+import { postRequest } from './services/apiService';
+
+interface ILoginData {
+    email: string;
+    password: string;
+}
 
 function App() {
-  return (
+    // States and Hooks
+    const [userName,setUserName] = useState('');    
+    const navigate = useNavigate();
+    useEffect(() => {
+        const name = localStorage.getItem('user');
+        if(!name) return;
+        setUserName(name);
+    },[]);
+
+    function handleLogout() {
+        localStorage.clear();
+        setUserName('');
+        navigate('/login');
+    }    
+
+    function login(data: ILoginData) {
+        const res = postRequest(
+            'users/login',
+            data,
+            false
+        );
+        if (!res) return;
+
+        res.then(response => response.json())
+            .then(json => {
+                if(json.error) {
+                    toast.error(json.error, {
+                            position: "top-center",
+                            autoClose: 3000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                            }    
+                        );
+                    return;
+                }  
+                toast.success(`User ${json.name} succsessifully Loged In`,{
+                    position: "top-left",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                })                              
+                setToken(json.token);
+                localStorage.setItem('admin', json.isAdmin)
+                setUserName(json.name);
+                navigate('/vacations');
+            })
+    }    
+
+    return (
         <>
-            <Navbar />
+            <Navbar 
+                userName={userName}
+                handleLogout={handleLogout}
+            />
             <ToastContainer />
             
             <Routes>
@@ -46,7 +113,7 @@ function App() {
                 />              
                 <Route 
                     path="/login"
-                    element={<Login />}
+                    element={<Login handler={login}/>}
                 />              
                 <Route 
                     path="/edit/:id"  // Dinamic Path

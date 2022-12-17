@@ -1,25 +1,14 @@
-import { useEffect, useState } from "react";
 // import { NavDropdown } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logout from "../auth/Logout";
 import User from "./User";
 
-function Navbar() {
-    // States and Hooks
-    const [userName,setUserName] = useState('');    
-    const navigate = useNavigate();
-    useEffect(() => {
-        const name = localStorage.getItem('user');
-        if(!name) return;
-        setUserName(name);
-    },[]);
+interface Props {
+    userName: string;
+    handleLogout: Function;
+}
 
-    function handleLogout() {
-        localStorage.clear();
-        setUserName('');
-        navigate('/login');
-    }
-
+function Navbar({ userName,handleLogout }: Props) {
     return ( 
         <header>
             <nav className="navbar navbar-dark bg-dark">
