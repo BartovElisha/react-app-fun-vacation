@@ -11,12 +11,12 @@ function Logout() {
     }
 
     return (
-        <a
+        <button
             onClick={handleLogout}
-            className="nav-link btn text-dark text-left"
+            className="btn btn-link nav-link text-dark"
         >
             LogOut
-        </a>
+        </button>
     );
 }
 
