@@ -1,6 +1,5 @@
 import Joi from "joi";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Title from "../components/Title";
 
 interface Props {
@@ -8,7 +7,6 @@ interface Props {
 }
 
 function Login({ handler }: Props) {
-    const navigate = useNavigate();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
