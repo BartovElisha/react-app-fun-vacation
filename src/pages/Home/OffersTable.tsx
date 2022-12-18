@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Offer, data } from "../../data/offers";
-import { priceFormat } from "../../utils/utils";
+import { formatPrice } from "../../utils/utils";
+
 
 enum SortDirection {
     asc = "asc",   // A-Z
@@ -130,7 +131,7 @@ function OffersTable() {
                                 <tr key={offer.id}>
                                     <td>{offer.date}</td>
                                     <td>{offer.location}</td>
-                                    <td>{priceFormat(offer.price)}</td>
+                                    <td>{formatPrice(offer.price)}</td>
                                 </tr>        
                             )
                         }

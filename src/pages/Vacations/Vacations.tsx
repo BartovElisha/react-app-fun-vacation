@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import Panel from "../../components/Panel";
 import Title from "../../components/Title";
 import { deleteRequest, getRequest } from "../../services/apiService";
-import { formatDate, priceFormat } from "../../utils/utils";
 import AddForm from "./AddForm";
+import TableRows from "./TableRows";
 
 export interface IVacation {
     _id: number;
@@ -12,6 +12,8 @@ export interface IVacation {
     location: string;
     price: number;    
 }
+
+export const VacationContext = createContext<Array<IVacation>>([]);
 
 function Vacations() {
     const [vacations,setVacations] = useState<Array<IVacation>>([]);
@@ -62,7 +64,7 @@ function Vacations() {
     }
 
     return (
-        <>
+        <VacationContext.Provider value={vacations}>
             <Title 
                 main="Vacations"
                 sub="manage vacation packages"
@@ -75,46 +77,30 @@ function Vacations() {
                 </div>
             }
 
-            <AddForm 
-                addVacation={addVacation}
-            />
+            <Panel>
+                <AddForm 
+                    addVacation={addVacation}
+                />
 
-            <table className="table table-hover">
-                <thead>
-                    <tr>
-                        <th className="w-25">Date</th>
-                        <th className="w-25">Location</th>
-                        <th className="w-50">Price</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        vacations.map(vacation => 
-                            <tr key={vacation._id}>
-                                <td>{formatDate(vacation.date)}</td>
-                                <td>{vacation.location}</td>
-                                <td>{priceFormat(vacation.price)}</td>
-                                <td className="d-flex">
-                                    <Link 
-                                        to={`/edit/${vacation._id}`}
-                                        className="btn btn-default"
-                                    >
-                                        <i className="bi-pen"></i>
-                                    </Link>
-                                    <button 
-                                        className="btn btn-default"
-                                        onClick={() => delVacation(vacation)}
-                                    >
-                                        <i className="bi-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>        
-                        )
-                    }
-                </tbody>
-            </table>              
-        </>
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th className="w-25">Date</th>
+                            <th className="w-25">Location</th>
+                            <th className="w-50">Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            <TableRows 
+                                delVacation={delVacation}
+                            />
+                        }
+                    </tbody>
+                </table>   
+            </Panel> 
+        </VacationContext.Provider>          
     );
 }
 

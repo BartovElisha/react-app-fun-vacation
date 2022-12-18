@@ -1,4 +1,4 @@
-export function priceFormat(value: number):string {
+export function formatPrice(value: number):string {
     return `${value}$`
 }
 
