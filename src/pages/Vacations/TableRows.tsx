@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import { formatDate, formatPrice } from "../../utils/utils";
 import { VacationContext } from "./Vacations";
 
-interface Props {
-    delVacation: Function;
-}
-
-function TableRows({ delVacation }: Props) {
-    const vacations = useContext(VacationContext);
+function TableRows() {
+    const context = useContext(VacationContext);
+    const vacations = context.vacations || [];
+    const delVacation = context.delVacation || function () { };
 
     return (
         <>
