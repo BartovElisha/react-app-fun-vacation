@@ -44,6 +44,7 @@ function App() {
     function handleLogout() {
         localStorage.clear();
         setUserName('');
+        setIsAdmin(false);
         navigate('/login');
     }    
 

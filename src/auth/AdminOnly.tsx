@@ -1,7 +1,10 @@
-function AdminOnly() {
-    const admin = localStorage.getItem('admin');
+import { useContext } from "react";
+import { AppContext } from "../App";
 
-    if (admin === "true") {
+function AdminOnly() {
+    const context = useContext(AppContext);
+
+    if (context && context.isAdmin) {
         return (
             <h2 className="text-center">
                 You've reached the Administartor page.

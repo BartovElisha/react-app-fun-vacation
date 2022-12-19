@@ -87,15 +87,18 @@ function Navbar() {
                                 <Logout />
                             </li>
                         }
-                        <li className="nav-item me-3">
-                            <NavLink
-                                className="nav-link"
-                                aria-current="page"
-                                to="/admin"
-                            >
-                                Admin Only
-                            </NavLink>
-                        </li>  
+                        {
+                            context && context.isAdmin && 
+                            <li className="nav-item me-3">
+                                <NavLink
+                                    className="nav-link"
+                                    aria-current="page"
+                                    to="/admin"
+                                >
+                                    Admin Only
+                                </NavLink>
+                            </li>  
+                        }
                     </ul>
                 </div>  
             </nav>
