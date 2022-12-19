@@ -1,13 +1,15 @@
-interface Props {
-    handler: Function;
-}
+import { useContext } from "react";
+import { AppContext } from "../App";
 
-function Logout({ handler }: Props) {
+function Logout() {
+    const context = useContext(AppContext);
+    if (!context) return <div>Error</div>;
+
     return (
         <button
-            onClick={(e) => handler()}
-            className="btn btn-link nav-link"
-            // className="btn btn-link nav-link text-dark"
+            onClick={(e) => context.handleLogout()}
+            // className="btn btn-link nav-link"
+            className="btn btn-link nav-link text-dark"
         >
             LogOut
         </button>

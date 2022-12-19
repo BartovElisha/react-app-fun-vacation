@@ -1,14 +1,9 @@
-// import { NavDropdown } from "react-bootstrap";
+import { NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Logout from "../auth/Logout";
 import User from "./User";
 
-interface Props {
-    userName: string;
-    handleLogout: Function;
-}
-
-function Navbar({ userName,handleLogout }: Props) {
+function Navbar() {
     return ( 
         <header>
             <nav className="navbar navbar-dark bg-dark">
@@ -34,7 +29,7 @@ function Navbar({ userName,handleLogout }: Props) {
                             </NavLink>
                         </li>
                         {/* Not work Logout in react dropdown element !!!! need check with Shay  */}
-                        {/* <NavDropdown title={<i className="bi bi-people"></i>} id="basic-nav-dropdown">
+                        <NavDropdown title={<i className="bi bi-people"></i>} id="basic-nav-dropdown">
                             <NavDropdown.Item href="#">
                                 <li className="nav-item">
                                     <NavLink to="/signUp" className="nav-link text-dark">
@@ -51,7 +46,7 @@ function Navbar({ userName,handleLogout }: Props) {
                             </NavDropdown.Item>
                             <NavDropdown.Item href="#">
                                 <li className="nav-item">
-                                    <Logout handler={handleLogout}/>
+                                    <Logout />
                                 </li>                        
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
@@ -66,8 +61,8 @@ function Navbar({ userName,handleLogout }: Props) {
                                     </NavLink>
                                 </li> 
                             </NavDropdown.Item>
-                        </NavDropdown> */}
-                        <li className="nav-item me-3">
+                        </NavDropdown>
+                        {/* <li className="nav-item me-3">
                             <NavLink to="/signUp" className="nav-link">
                                 Sign Up
                             </NavLink>
@@ -78,7 +73,7 @@ function Navbar({ userName,handleLogout }: Props) {
                             </NavLink>
                         </li>
                         <li className="nav-item me-3">
-                            <Logout handler={handleLogout} />
+                            <Logout />
                         </li>
                         <li className="nav-item me-3">
                             <NavLink
@@ -88,11 +83,11 @@ function Navbar({ userName,handleLogout }: Props) {
                             >
                                 Admin Only
                             </NavLink>
-                        </li>  
+                        </li>   */}
                     </ul>
                 </div>  
             </nav>
-            <User userName={userName}/>            
+            <User />            
         </header>
     );
 }

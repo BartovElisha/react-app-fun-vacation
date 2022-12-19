@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import './App.css';
@@ -21,9 +21,19 @@ interface ILoginData {
     password: string;
 }
 
+interface Context {
+    userName: string;
+    handleLogout: Function;
+    login: Function;
+    isAdmin: boolean;
+}
+
+export const AppContext = createContext<Context | null>(null);
+
 function App() {
     // States and Hooks
-    const [userName,setUserName] = useState('');    
+    const [userName,setUserName] = useState('');  
+    const [isAdmin, setIsAdmin] = useState(false);  
     const navigate = useNavigate();
     useEffect(() => {
         const name = localStorage.getItem('user');
@@ -72,20 +82,22 @@ function App() {
                     theme: "colored",
                 })                              
                 setToken(json.token);
-                localStorage.setItem('admin', json.isAdmin)
+                localStorage.setItem('admin', json.isAdmin);
+                setIsAdmin(json.isAdmin);
                 setUserName(json.name);
                 navigate('/vacations');
             })
     }    
 
     return (
-        <>
-            <Navbar 
-                userName={userName}
-                handleLogout={handleLogout}
-            />
-            <ToastContainer />
-            
+        <AppContext.Provider value={{
+            userName,
+            handleLogout,
+            login,
+            isAdmin
+        }}>
+            <Navbar />
+            <ToastContainer />            
             <Routes>
                 <Route 
                     path="/"
@@ -130,7 +142,7 @@ function App() {
             </Routes>
             
             <Footer />      
-        </>
+        </AppContext.Provider>
   );
 }
 
