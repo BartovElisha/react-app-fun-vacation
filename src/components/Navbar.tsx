@@ -1,4 +1,4 @@
-// import { NavDropdown } from "react-bootstrap";
+import { NavDropdown } from "react-bootstrap";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../App";
@@ -17,6 +17,9 @@ function Navbar() {
                         <i className="bi-airplane-engines me-2"></i>
                         Fun Vacation
                     </a>
+                    <span className="btn text-light">
+                        <User />                        
+                    </span>                    
                     <ul className="navbar-nav flex-row">
                         <li className="nav-item me-3">
                             <NavLink to="/orders" className="nav-link">
@@ -33,40 +36,57 @@ function Navbar() {
                                 About
                             </NavLink>
                         </li>
-                        {/* <NavDropdown title={<i className="bi bi-people"></i>} id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#">
-                                <li className="nav-item">
-                                    <NavLink to="/signUp" className="nav-link text-dark">
-                                        Sign Up
-                                    </NavLink>
-                                </li>
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#">
-                                <li className="nav-item">
-                                    <NavLink to="/login" className="nav-link text-dark">
-                                        Login
-                                    </NavLink>
-                                </li>
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#">
-                                <li className="nav-item">
-                                    <Logout />
-                                </li>                        
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#">
-                                <li className="nav-item me-3">
-                                    <NavLink
-                                        className="nav-link text-dark"
-                                        aria-current="page"
-                                        to="/admin"
-                                    >
-                                        Admin Only
-                                    </NavLink>
-                                </li> 
-                            </NavDropdown.Item>
-                        </NavDropdown> */}
-                        {
+                        {/* SignUp, Login, Logout and Admin Only on Navbar Dropdown */}
+                        <NavDropdown 
+                            title={<i className="bi bi-people"></i>} 
+                            id="basic-nav-dropdown">
+                            {
+                                !isLoggedIn &&
+                                <>
+                                    <NavDropdown.Item href="#">
+                                        <li className="nav-item">
+                                            <NavLink to="/signUp" className="nav-link text-dark">
+                                                Sign Up
+                                            </NavLink>
+                                        </li>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="#">
+                                        <li className="nav-item">
+                                            <NavLink to="/login" className="nav-link text-dark">
+                                                Login
+                                            </NavLink>
+                                        </li>
+                                    </NavDropdown.Item>
+                                </>
+                            }
+                            {
+                                isLoggedIn &&    
+                                <NavDropdown.Item href="#">
+                                    <li className="nav-item">
+                                        <Logout />
+                                    </li>                        
+                                </NavDropdown.Item>
+                            }
+                            {
+                                context && context.isAdmin &&
+                                <>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="#">
+                                        <li className="nav-item me-3">
+                                            <NavLink
+                                                className="nav-link text-dark"
+                                                aria-current="page"
+                                                to="/admin"
+                                            >
+                                                Admin Only
+                                            </NavLink>
+                                        </li> 
+                                    </NavDropdown.Item>
+                                </>
+                            }
+                        </NavDropdown>
+                        {/* SignUp, Login, Logout and Admin Only on Navbar */}
+                        {/* {
                             !isLoggedIn && 
                             <>
                                 <li className="nav-item me-3">
@@ -98,11 +118,11 @@ function Navbar() {
                                     Admin Only
                                 </NavLink>
                             </li>  
-                        }
+                        } */}
                     </ul>
                 </div>  
             </nav>
-            <User />            
+            {/* <User />  */}
         </header>
     );
 }
