@@ -6,9 +6,15 @@ function User() {
     if (!context) return <div>Error</div>;
 
     return (  
-        <div>
-            Hello {context.userName}
-        </div>
+        <>
+            {
+                (context.userName.length === 0) ? null : (
+                    <div>
+                        Hello {context.userName}
+                    </div>
+                )
+            }
+        </>
     );
 }
 

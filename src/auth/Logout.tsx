@@ -8,8 +8,8 @@ function Logout() {
     return (
         <button
             onClick={(e) => context.handleLogout()}
-            // className="btn btn-link nav-link"
-            className="btn btn-link nav-link text-dark"
+            className="btn btn-link nav-link"
+            // className="btn btn-link nav-link text-dark"
         >
             LogOut
         </button>
